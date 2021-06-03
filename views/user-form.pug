@@ -1,0 +1,31 @@
+extends layout 
+
+block content
+  include mixins
+  h2=title
+  div
+    form.mt-3(method="POST" action="") 
+      div.form-group
+        label(for="firstName") First Name
+        input.form-control#firstName(type="text" name="firstName" value=(user ? user.firstName : ''))
+        +errorList('firstName')
+      div.form-group.mt-2
+        label(for="lastName") Last name
+        input.form-control#lastName(type="text" name="lastName" value=(user ? user.lastName : ''))
+        +errorList('lastName')
+      div.form-group.mt-3
+        label(for="username") Username
+        input.form-control#username(type="text" name="username" value=(user ? user.username : ''))
+        +errorList('username')
+      div.form-group.mt-2
+        div 
+          label(for="password") Password
+          input.form-control#password(type="password" name="password" value=(user ? user.password : ''))
+          +errorList('password')
+        div.mt-2
+          label(for="confirmPassword") Confirm Password
+          input.form-control#confirmPassword(type="password" name="confirmPassword" value="")
+          +errorList('confirmPassword')          
+
+      button.btn.btn-primary.mt-3(type="submit") #{btnText}
+    

@@ -1,0 +1,6 @@
+mixin errorList(listName)
+  if errors
+    ul
+      each error in errors 
+        if error.param == listName 
+          li #{error.msg}

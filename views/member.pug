@@ -1,0 +1,15 @@
+extends layout 
+
+block content 
+  div 
+    if currentUser.membershipStatus == 'Member'
+      p You already are a member.
+    else 
+      form(method="POST" action="") 
+        div.form-group.mt-2
+          label(for="secretPassword") How many degrees can an owl turn its head?
+          input#secretPassword.form-control.mt-2(type="password" name="secretPassword")
+          if message 
+            small
+              strong.text-danger #{message}        
+        button.btn.btn-primary.mt-2 Submit

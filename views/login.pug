@@ -1,0 +1,17 @@
+extends layout 
+
+block content 
+  form(method="POST" action="") 
+    div.form-group.mt-2
+      label(for="username") Username
+      input.form-control#username(type="text" name="username" value=(username ? username : ''))
+      
+    div.form-group.mt-2
+      label(for="password") Password
+      input.form-control#password(type="password" name="password")
+    button.mt-2.btn.btn-primary Login
+    if errorMessage
+      div.mt-2
+        p 
+          strong.text-danger #{errorMessage}
+

@@ -9,7 +9,13 @@ router.get('/', function (req, res, next) {
 });
 
 router.get('/sign-up', userController.signUpGet);
-
 router.post('/sign-up', userController.signUpPost);
+
+router.get('/login', userController.loginGet);
+router.post('/login', userController.loginPost);
+router.get('/sign-out', userController.signOut);
+
+router.get('/member', userController.memberGet);
+router.post('/member', userController.memberPost);
 
 module.exports = router;

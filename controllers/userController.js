@@ -1,5 +1,6 @@
 const { body, validationResult, check } = require('express-validator');
 const bcrypt = require('bcryptjs');
+const passport = require('passport');
 
 const User = require('../models/user');
 
@@ -89,3 +90,61 @@ exports.signUpPost = [
     }
   },
 ];
+
+exports.loginGet = function (req, res) {
+  const hasError = req.flash().error;
+
+  if (hasError) {
+    return res.render('login', {
+      errorMessage: 'Invalid credentials',
+    });
+  }
+  res.render('login');
+};
+
+exports.loginPost = passport.authenticate('local', {
+  successRedirect: '/',
+  failureRedirect: '/login',
+  failureFlash: true,
+});
+
+exports.signOut = function (req, res) {
+  req.logout();
+  res.redirect('/');
+};
+
+exports.memberGet = function (req, res) {
+  if (!req.user) {
+    return res.redirect('/login');
+  }
+
+  res.render('member');
+};
+
+exports.memberPost = function (req, res, next) {
+  if (!req.user) {
+    return res.redirect('/login');
+  }
+
+  const userPassword = req.body.secretPassword;
+
+  if (process.env.SUPER_SECRET_MEMBER_PASSWORD != userPassword) {
+    return res.render('member', {
+      message: 'Wrong answer!',
+    });
+  } else {
+    const userId = req.user._id;
+
+    const updatedUser = new User({
+      ...req.user,
+      membershipStatus: 'Member',
+      _id: userId,
+    });
+    User.findByIdAndUpdate(userId, updatedUser, function (err) {
+      if (err) {
+        return next(err);
+      }
+      res.redirect('/member');
+    });
+  }
+};

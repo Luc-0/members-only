@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const messageSchema = new Schema({
   title: { type: String, required: true, maxLength: 50 },
   message: { type: String, required: true, maxLength: 300 },
-  timestamp: { type: Date, required: true },
+  timestamp: { type: Date, default: Date.now, required: true },
   user: { type: Schema.Types.ObjectId, ref: 'User', required: true },
 });
 

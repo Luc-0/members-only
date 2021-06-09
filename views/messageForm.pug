@@ -1,0 +1,15 @@
+extends layout 
+
+block content 
+  include mixins
+  form(method="POST" action="") 
+    h2=(title || '')
+    div.form-group.mt-3
+      label(for="title") Title
+      input#title.form-control.mt-2(type="text" name="title" value=(message ? message.title : ''))
+      +errorList('title')
+    div.form-group.mt-3
+      label(for="message") Message
+      textarea#message.form-control.mt-2(name="message", cols="30", rows="10") #{message ? message.message : ''}
+      +errorList('message')
+    button.btn.btn-primary.mt-2 #{btnText || 'Submit'}

@@ -2,6 +2,20 @@ const { body, validationResult } = require('express-validator');
 
 const Message = require('../models/message');
 
+exports.messageList = function (req, res, next) {
+  Message.find({})
+    .populate('user')
+    .exec(function (err, messages) {
+      if (err) {
+        return next(err);
+      }
+
+      res.render('messageList', {
+        messages: messages,
+      });
+    });
+};
+
 exports.newMessageGet = function (req, res, next) {
   if (!req.user) {
     return res.redirect('/login');

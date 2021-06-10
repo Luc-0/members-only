@@ -1,0 +1,16 @@
+extends layout 
+
+block content 
+  each message in messages 
+    div.card.mt-3
+      div.card-body
+        h4.card-title #{message.title}
+        p.card-text #{message.message}
+        if currentUser && currentUser.membershipStatus == 'Member'
+          div.d-flex
+            p #[strong Author: ] #{message.user.fullName}
+            p.ms-auto #[strong Date: ] #{message.formattedDate}
+
+
+
+

@@ -5,9 +5,7 @@ var userController = require('../controllers/userController');
 var messageController = require('../controllers/messageController');
 
 /* GET home page. */
-router.get('/', function (req, res, next) {
-  res.render('index', { title: 'Members Only App' });
-});
+router.get('/', messageController.messageList);
 
 router.get('/sign-up', userController.signUpGet);
 router.post('/sign-up', userController.signUpPost);

@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const membershipStatusList = ['Member', 'Not-member'];
+const membershipStatusList = ['Member', 'Not-member', 'Admin'];
 
 const userSchema = new Schema({
   username: { type: String, required: true, minLength: 3, maxLength: 30 },

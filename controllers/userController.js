@@ -148,3 +148,30 @@ exports.memberPost = function (req, res, next) {
     });
   }
 };
+
+exports.adminGet = function (req, res) {
+  if (!req.user) {
+    return res.redirect('/login');
+  }
+
+  res.render('admin');
+};
+
+exports.adminPost = function (req, res, next) {
+  if (!req.user) {
+    return res.redirect('/login');
+  }
+  const userId = req.user._id;
+
+  const updatedUser = new User({
+    ...req.user,
+    membershipStatus: 'Admin',
+    _id: userId,
+  });
+  User.findByIdAndUpdate(userId, updatedUser, function (err) {
+    if (err) {
+      return next(err);
+    }
+    res.redirect('/admin');
+  });
+};

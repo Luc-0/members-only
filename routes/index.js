@@ -17,7 +17,12 @@ router.get('/sign-out', userController.signOut);
 router.get('/member', userController.memberGet);
 router.post('/member', userController.memberPost);
 
+router.get('/admin', userController.adminGet);
+router.post('/admin', userController.adminPost);
+
 router.get('/message/new', messageController.newMessageGet);
 router.post('/message/new', messageController.newMessagePost);
+
+router.post('/message/delete', messageController.deleteMessage);
 
 module.exports = router;

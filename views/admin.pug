@@ -1,0 +1,9 @@
+extends layout 
+
+block content 
+  div 
+    if currentUser.membershipStatus == 'Admin'
+      p You already are a admin.
+    else
+      form(method="POST" action="") 
+        button.btn.btn-success.mt-2 I want to be an admin

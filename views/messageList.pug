@@ -4,9 +4,15 @@ block content
   each message in messages 
     div.card.mt-3
       div.card-body
-        h4.card-title #{message.title}
+        div.d-flex
+          h4.card-title #{message.title}
+          if currentUser && currentUser.membershipStatus == 'Admin'
+            form.ms-auto(method="POST" action="/message/delete") 
+              input#messageId(type="hidden" name="messageId" value=(message._id))
+              button.btn.btn-danger(type="submit") Delete
+
         p.card-text #{message.message}
-        if currentUser && currentUser.membershipStatus == 'Member'
+        if currentUser && (currentUser.membershipStatus == 'Member' || currentUser.membershipStatus == 'Admin')
           div.d-flex
             p #[strong Author: ] #{message.user.fullName}
             p.ms-auto #[strong Date: ] #{message.formattedDate}

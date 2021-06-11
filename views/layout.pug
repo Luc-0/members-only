@@ -14,8 +14,9 @@ html
           div.collapse.navbar-collapse#navbarNavAltMarkup
           div.navbar-nav
             if currentUser 
-              if currentUser.membershipStatus == 'Member'
+              if currentUser.membershipStatus == 'Member' || currentUser.membershipStatus == 'Admin'
                 a.nav-link(href="/message/new") New Message
+                a.nav-link(href="/admin") Admin
               a.nav-link(href="/member") Member
               a.nav-link(href="/sign-out") Sign out 
             else 

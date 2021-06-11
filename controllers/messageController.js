@@ -70,3 +70,18 @@ exports.newMessagePost = [
     });
   },
 ];
+
+exports.deleteMessage = function (req, res, next) {
+  if (!req.user || req.user.membershipStatus != 'Admin') {
+    return res.redirect('/login');
+  }
+  const messageId = req.body.messageId;
+
+  Message.findByIdAndRemove(messageId, function (err) {
+    if (err) {
+      return next(err);
+    }
+
+    res.redirect('/');
+  });
+};
